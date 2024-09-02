@@ -693,7 +693,13 @@ if page == pages[7]:    # Model Analysis
 
 
 if page == pages[8]:   # Critical Appraisal"
-    st.write("## Critical Appraisal")
+    st.write("## Results and Critical Appraisal")
+
+    st.write("#### Results Predition and ML Results")
+    image = Image.open('Overview_Predict_result.png')
+    st.image(image, caption='Overview Prediction and Results', use_column_width=True)
+    st.write("The table reflects that the ML model's results largely confirmed the initial predictions about the spatial characteristics of urban and rural areas, with some nuanced findings, such as unexpected variations in rural vehicle ownership and the identification of outliers. The results led to strategic insights that were both expected and refined based on the detailed cluster analysis.")
+
     st.write("""
     #### Strengths:
     DBSCAN Success: Effectively identified meaningful clusters, handling non-spherical shapes and outliers.
