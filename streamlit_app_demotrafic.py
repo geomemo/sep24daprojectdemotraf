@@ -547,7 +547,7 @@ if page == pages[7]:    # Model Analysis
     st.write("This section analyzes the clustering results using the DBSCAN method.")
 
     # Load the dataset
-    df = pd.read_csv("PopTra_cluster_corx4.csv", delimiter=';', encoding='utf-8')
+    df = pd.read_csv("PopTra_cluster_corx7.csv", delimiter=',', encoding='utf-8')
 
     # Select the relevant features for clustering
     features = ['Pop_Dens', 'Veh_Dens', 'Veh_1kpop', 'Pop_Sum', 'Veh_Sum']
