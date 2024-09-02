@@ -228,7 +228,7 @@ if page == pages[4]:    # Cleaning and Preparation
     """)
     
 
-    image = Image.open('Flowchart_project.png')
+    image = Image.open('Flowchart_project1.png')
     st.image(image, caption='Flowchart Data Preparing', use_column_width=True)
     
     
