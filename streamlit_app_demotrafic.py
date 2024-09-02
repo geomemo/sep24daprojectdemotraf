@@ -150,7 +150,7 @@ if page == pages[3]:    # Presentation of data
     st.write("The plots show clear relationships between total population and total vehicles, as well as between population density and vehicle density. However, the vehicles per 1,000 people (Veh_1kpop) metric does not strongly correlate with the density measures, suggesting that factors other than density alone affect vehicle ownership rates across different regions.")
 
     # Load the CSV file into a DataFrame
-    data = pd.read_csv("PopTra_cluster_corx4.csv", delimiter=';', encoding='utf-8')
+    data = pd.read_csv("PopTra_cluster_corx7.csv", delimiter=';', encoding='utf-8')
 
         # Select the relevant features for the heatmap
     features_for_heatmap = ['Pop_Dens', 'Veh_Dens', 'Veh_1kpop', 'Pop_Sum', 'Veh_Sum']
