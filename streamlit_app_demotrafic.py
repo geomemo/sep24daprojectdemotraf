@@ -4,6 +4,8 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
+import csv
+import base64
 from sklearn.preprocessing import StandardScaler
 from PIL import Image
 from sklearn.decomposition import PCA
@@ -18,16 +20,16 @@ df = pd.read_csv("PopTra_cluster_corx7.csv", delimiter=',')
 # Load sidebar image
 sidebar_image = Image.open("sidebar_image1.png")  
 st.sidebar.image(sidebar_image, use_column_width=True)
-st.sidebar.markdown("Data Analyst DA_June24 Bootcamp")
-st.sidebar.markdown("M. Girtten")
+st.sidebar.markdown("**Data Analyst DA_June24 Bootcamp**")
+st.sidebar.markdown("M. Girtten ")
 st.title("Investigating Relationships Between Demographic Data and Traffic Data in Germany")
-st.write("A Data-Driven Approach to Urban and Rural Density Analysis")
+st.write("A Data-Driven Approach to Urban and Rural Traffic Analysis")
 
 st.sidebar.title("Table of contents")
 pages = [
     "👋 Introduction", 
     "📈 Preparation and Presentation", 
-    "⚙️ Model Analysis", 
+    "⚙️ Data Exploration and Analysis", 
     "📌 Conclusion and Perspectives"
 ]
 page = st.sidebar.radio("Go to", pages)
@@ -83,6 +85,56 @@ if page == pages[1]:    # Preparation and Presentation
     - **Total Vehicles (Veh_Sum)**: Represents the aggregate number of vehicles in each district.
     """)
 
+
+
+    
+
+    # # Title
+    # st.title("Vehicles per 1000 Population vs Population Density")
+
+    # # Read the CSV file
+    # @st.cache_data
+    # def load_data():
+    #     data = pd.read_csv('PopTra_cluster_corx7.csv')
+    #     return data
+
+    # data = load_data()
+
+    # # Display data info
+    # st.subheader("Data Info")
+    # st.write(data.info())
+
+    # # Display summary statistics
+    # st.subheader("Summary Statistics")
+    # st.write(data.describe())
+
+    # # Check for zero values
+    # st.subheader("Zero Value Counts")
+    # zero_counts = (data == 0).sum()
+    # st.write(zero_counts[zero_counts > 0])
+
+    # # Create the scatter plot
+    # fig, ax = plt.subplots(figsize=(10, 6))
+    # ax.scatter(data['Veh_1kpop'], data['Pop_Dens'], alpha=0.5)
+
+    # # Set labels and title
+    # ax.set_xlabel('Vehicles per 1000 Population')
+    # ax.set_ylabel('Population Density')
+    # ax.set_title('Vehicles per 1000 Population vs Population Density')
+
+    # # Add a grid
+    # ax.grid(True, linestyle='--', alpha=0.7)
+
+    # # Display the plot in Streamlit
+    # st.pyplot(fig)
+
+    # # Display the data
+    # st.subheader("Data")
+    # st.dataframe(data)
+
+
+
+
     st.dataframe(df.head(10))
     st.write(df.shape)
     st.dataframe(df.describe())
@@ -92,8 +144,8 @@ if page == pages[1]:    # Preparation and Presentation
 
     st.write("## Data Visualization")
     # Extract the relevant columns
-    x = df['Pop_Dens']
-    y = df['Veh_Dens']
+    x = df['Pop_Dens'] 
+    y = df['Veh_Dens'] 
 
     # Create the scatter plot
     plt.figure(figsize=(10, 6))
@@ -106,9 +158,26 @@ if page == pages[1]:    # Preparation and Presentation
     st.pyplot(plt)
     st.write("The scatter plot shows a clear positive correlation between population density and vehicle density. As population density increases, vehicle density also tends to increase. This relationship makes sense because areas with higher population density are likely to have more vehicles per unit area due to higher demand for transportation.")
 
-    pairplot_image = Image.open('pairPlot.png')
-    st.image(pairplot_image, caption='Pair Plot', use_column_width=True)
-    st.write("The plots show clear relationships between total population and total vehicles, as well as between population density and vehicle density. However, the vehicles per 1,000 people (Veh_1kpop) metric does not strongly correlate with the density measures, suggesting that factors other than density alone affect vehicle ownership rates across different regions.")
+
+    # st.write("## Data Visualization")
+    # # Extract the relevant columns
+    # x = df['Pop_Dens']
+    # y = df['Veh_1kpop']
+
+    # # Create the scatter plot
+    # plt.figure(figsize=(10, 6))
+    # plt.scatter(x, y)
+    # plt.xlabel('Population Density')
+    # plt.ylabel('Vehicles per 1,000 People')
+    # plt.title('Scatter Plot of Population Density vs Vehicles per 1,000 People')
+
+    # # Display the plot in Streamlit
+    # st.pyplot(plt)
+    # st.write("The scatter plot shows a clear positive correlation between population density and vehicle density. As population density increases, vehicle density also tends to increase. This relationship makes sense because areas with higher population density are likely to have more vehicles per unit area due to higher demand for transportation.")
+
+    # pairplot_image = Image.open('pairPlot.png')
+    # st.image(pairplot_image, caption='Pair Plot', use_column_width=True)
+    # st.write("The plots show clear relationships between total population and total vehicles, as well as between population density and vehicle density. However, the vehicles per 1,000 people (Veh_1kpop) metric does not strongly correlate with the density measures, suggesting that factors other than density alone affect vehicle ownership rates across different regions.")
 
     # Load the CSV file into a DataFrame
     data = pd.read_csv("PopTra_cluster_corx7.csv", delimiter=',', encoding='utf-8')
@@ -207,8 +276,40 @@ if page == pages[1]:    # Preparation and Presentation
     veh_per_1k_pop_image = Image.open('Veh_1kP.png')
     st.image(veh_per_1k_pop_image, caption='Vehicle per 1k Pop in German Districts from 2018-2020 [geopandas, girtten, 08-24]', use_column_width=True)
 
-    pbi_image = Image.open('PBI_1.gif')
-    st.image(pbi_image, caption='Area Type and VDL in PowerBI, girtten, 09_24', use_column_width=False)
+    #pbi_image = Image.open('PBI_1.gif')
+    #st.image(pbi_image, caption='Area Type and VDL in PowerBI, girtten, 09_24', use_column_width=False)
+
+
+
+
+
+    
+
+
+
+
+
+ 
+
+    def load_gif(file_path):
+        with open(file_path, "rb") as f:
+            contents = f.read()
+        data_url = base64.b64encode(contents).decode("utf-8")
+        return data_url
+
+
+    # Gif Animation
+    st.write("**Comparison Population and Traffic in Germany with PowerBI**")
+
+    # Path to your GIF file
+    gif_path = "PBI_1.gif"
+
+    # Load the GIF
+    data_url = load_gif(gif_path)
+
+    # Display the GIF using HTML
+    st.markdown(f'<img src="data:image/gif;base64,{data_url}" alt="cat gif">', unsafe_allow_html=True)
+
 
     st.write("## Cleaning and Preparation")
     st.write("""
@@ -237,8 +338,8 @@ if page == pages[1]:    # Preparation and Presentation
     st.image(flowchart_image, caption='Flowchart Data Preparing', use_column_width=True)
 
 if page == pages[2]:    # Model Analysis
-    st.write("## Model Analysis")
     st.write("## Data Exploration")
+    #st.write("## Data Exploration")
     st.write("This section standardizes the selected features in the dataset before applying PCA and K-Means Clustering.")
 
     # Display the original data
@@ -480,7 +581,7 @@ if page == pages[2]:    # Model Analysis
 
 if page == pages[3]:    # Conclusion and Perspectives
     st.write("## Conclusion and Perspectives")
-    st.write("## Results and Critical Appraisal")
+    #st.write("## Results and Critical Appraisal")
     st.write("####  Results Predition and ML Results")
     overview_image = Image.open('Overview_Predict_result.png')
     st.image(overview_image, caption='Overview Prediction and Results', use_column_width=True)
