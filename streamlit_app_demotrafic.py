@@ -148,15 +148,15 @@ if page == pages[1]:    # Preparation and Presentation
     y = df['Veh_Dens'] 
 
     # Create the scatter plot
-    plt.figure(figsize=(10, 6))
-    plt.scatter(x, y)
-    plt.xlabel('Population Density')
-    plt.ylabel('Vehicle Density')
-    plt.title('Scatter Plot of Population Density vs Vehicle Density')
+    # plt.figure(figsize=(10, 6))
+    # plt.scatter(x, y)
+    # plt.xlabel('Population Density')
+    # plt.ylabel('Vehicle Density')
+    # plt.title('Scatter Plot of Population Density vs Vehicle Density')
 
-    # Display the plot in Streamlit
-    st.pyplot(plt)
-    st.write("The scatter plot shows a clear positive correlation between population density and vehicle density. As population density increases, vehicle density also tends to increase. This relationship makes sense because areas with higher population density are likely to have more vehicles per unit area due to higher demand for transportation.")
+    # # Display the plot in Streamlit
+    # st.pyplot(plt)
+    # st.write("The scatter plot shows a clear positive correlation between population density and vehicle density. As population density increases, vehicle density also tends to increase. This relationship makes sense because areas with higher population density are likely to have more vehicles per unit area due to higher demand for transportation.")
 
 
     # st.write("## Data Visualization")
@@ -175,9 +175,9 @@ if page == pages[1]:    # Preparation and Presentation
     # st.pyplot(plt)
     # st.write("The scatter plot shows a clear positive correlation between population density and vehicle density. As population density increases, vehicle density also tends to increase. This relationship makes sense because areas with higher population density are likely to have more vehicles per unit area due to higher demand for transportation.")
 
-    # pairplot_image = Image.open('pairPlot.png')
-    # st.image(pairplot_image, caption='Pair Plot', use_column_width=True)
-    # st.write("The plots show clear relationships between total population and total vehicles, as well as between population density and vehicle density. However, the vehicles per 1,000 people (Veh_1kpop) metric does not strongly correlate with the density measures, suggesting that factors other than density alone affect vehicle ownership rates across different regions.")
+    pairplot_image = Image.open('pairPlot.png')
+    st.image(pairplot_image, caption='Pair Plot', use_column_width=True)
+    st.write("The plots show clear relationships between total population and total vehicles, as well as between population density and vehicle density. However, the vehicles per 1,000 people (Veh_1kpop) metric does not strongly correlate with the density measures, suggesting that factors other than density alone affect vehicle ownership rates across different regions.")
 
     # Load the CSV file into a DataFrame
     data = pd.read_csv("PopTra_cluster_corx7.csv", delimiter=',', encoding='utf-8')
@@ -199,7 +199,7 @@ if page == pages[1]:    # Preparation and Presentation
     st.write("Correlation Heatmap")
     st.pyplot(heatmap.figure)
     st.write("The heatmap shows strong positive correlations between population density and vehicle density (1.00), and between total population and total vehicles (0.97). This indicates that denser and larger populations generally lead to higher vehicle counts. Weak negative correlations appear between vehicles per 1000 people and total population (-0.32), suggesting that areas with larger populations tend to have fewer vehicles per capita. Near-zero correlations between population density and total population suggest that population size does not necessarily correspond to density, likely due to varying urban and rural patterns across regions.")
-
+    st.write("*Veh_1kpop* differs from density metrics because it normalizes vehicle ownership relative to population, making it independent of spatial factors. Its trends reflect socioeconomic influences like income or public transportation rather than density alone. This feature allows for consistent comparisons across regions with different populations, revealing patterns in vehicle ownership. It benefits machine learning models by reducing skewed data and scale issues, offering a balanced measure for capturing per capita trends and improving insights into regional vehicle ownership dynamics.")
     st.write("""
     #### Additional Features
     **Area Type (AreaType)** The EU's Urban-Rural Typology classifies areas based on population density and size, using a population grid approach.
@@ -483,6 +483,8 @@ if page == pages[2]:    # Model Analysis
 
     # Display the result
     st.dataframe(cluster_means)
+    st.write("The values indicate that Cluster 0 represents areas with significantly larger area sizes and fewer vehicles on average, whereas Cluster 1 has smaller areas but a higher average number of vehicles (except for trucks and tractors)")
+
 
     st.write(f"K-Means Clustering with k={optimal_clusters}")
     df['Cluster'] = kmeans.labels_
@@ -501,7 +503,7 @@ if page == pages[2]:    # Model Analysis
     plt.grid(True)
 
     st.pyplot(plt)
-    st.write("The K-Means results show distinct clusters, likely separating urban areas from rural ones. Most districts form a tight cluster, indicating similar traffic patterns, while outliers represent regions with different demographics or traffic characteristics. This supports the project's goal of distinguishing urban and rural areas based on vehicle and population density, demonstrating K-Means effectiveness in identifying regions with unique socio-economic profiles. These insights are valuable for targeted urban planning and traffic management strategies.")
+    st.write("The K-means clustering result reinforces this observation. The clustering clearly separates regions, with **rural areas forming distinct clusters that tend to have higher vehicle ownership per capita, as indicated by the higher Veh_1kpop in these areas**. The yellow clusters in the K-means plot represent these rural regions with distinct vehicle ownership patterns, separating them from urban areas where public transportation is more prevalent. These insights are valuable for targeted urban planning and traffic management strategies.")
 
     cluster_centers = scaler.inverse_transform(kmeans.cluster_centers_)
     cluster_centers_df = pd.DataFrame(cluster_centers, columns=features)
@@ -522,8 +524,8 @@ if page == pages[2]:    # Model Analysis
     plt.tight_layout()
     st.pyplot(plt)
 
-    st.write("Cluster 1 --Urban Areas--:    High Population Density: Regions in this cluster have high population densities.     High Vehicle Density: These regions also show high vehicle densities.     Lower Vehicles per 1000 People: Despite high vehicle density, vehicle ownership per capita is lower, likely due to better public transportation options.     Higher Total Population and Vehicles: Reflecting the larger, more urbanized areas.")
-    st.write("Cluster 0 --Rural Areas--:    Low Population Density: Regions in this cluster have very low population densities.     Low Vehicle Density: Vehicle density is also low.     Higher Vehicles per 1000 People: Rural areas show higher vehicle ownership per capita, possibly due to the necessity of personal vehicles in areas with limited public transportation.     Lower Total Population and Vehicles: These regions are less populated with fewer total vehicles.")
+    st.write("Cluster 1 --Urban Areas--:    High Population Density: Regions in this cluster have high population densities.     High Vehicle Density: These regions also show high vehicle densities.     **Lower Vehicles per 1000 People: Despite high vehicle density, vehicle ownership per capita is lower, likely due to better public transportation options.**     Higher Total Population and Vehicles: Reflecting the larger, more urbanized areas.")
+    st.write("Cluster 0 --Rural Areas--:    Low Population Density: Regions in this cluster have very low population densities.     Low Vehicle Density: Vehicle density is also low.     **Higher Vehicles per 1000 People: Rural areas show higher vehicle ownership per capita, possibly due to the necessity of personal vehicles in areas with limited public transportation.**     Lower Total Population and Vehicles: These regions are less populated with fewer total vehicles.")
     st.write("#### Insights for Strategic Decisions: ")
     st.write("Urban Planning: For Cluster 1, focus on managing high population and vehicle densities, potentially by improving public transportation to reduce the need for personal vehicles. Rural Development: In Cluster 0, consider infrastructure improvements to support the higher per capita vehicle ownership, such as better road maintenance and access to services. Public Transportation: The difference in vehicle ownership per capita between the clusters suggests a need to tailor public transportation solutions based on regional characteristics.")
 
@@ -589,7 +591,7 @@ if page == pages[3]:    # Conclusion and Perspectives
     overview_image = Image.open('Overview_Predict_result.png')
     st.image(overview_image, caption='Overview Prediction and Results', use_column_width=True)
     st.write("The table reflects that the ML model's results largely confirmed the initial predictions about the spatial characteristics of urban and rural areas, with some nuanced findings, such as unexpected variations in rural vehicle ownership and the identification of outliers. The results led to strategic insights that were both expected and refined based on the detailed cluster analysis.")
-
+    st.write("Together, the heatmap and K-means clustering confirm that rural areas, with lower population and vehicle densities, have higher vehicle ownership per capita due to the increased necessity for personal transportation. Conversely, urban areas, where public transportation systems are more developed, generally exhibit lower vehicle ownership per capita. However, the analysis also highlights outliers and exceptions within urban regions, reflecting the complex interplay of factors such as income and transit availability. ")
     st.write("""
     #### Strengths:
     DBSCAN Success: Effectively identified meaningful clusters, handling non-spherical shapes and outliers.
