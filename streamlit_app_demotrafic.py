@@ -17,13 +17,13 @@ from sklearn.cluster import DBSCAN
 # Load the CSV file into a DataFrame
 df = pd.read_csv("PopTra_cluster_corx7.csv", delimiter=',')
 
-# Load sidebar image
 sidebar_image = Image.open("sidebar_image1.png")  
 st.sidebar.image(sidebar_image, use_column_width=True)
 st.sidebar.markdown("**Data Analyst DA_June24 Bootcamp**")
-st.sidebar.markdown("M. Girtten ")
+st.sidebar.markdown("M. Girtten - Geography M.Sc.<br>Lars Zintel - Economics M.Sc.", unsafe_allow_html=True)  
 st.title("Investigating Relationships Between Demographic Data and Traffic Data in Germany")
 st.write("A Data-Driven Approach to Urban and Rural Traffic Analysis")
+
 
 st.sidebar.title("Table of contents")
 pages = [
@@ -377,7 +377,7 @@ if page == pages[2]:    # Model Analysis
     # Plot the principal components
     st.write("### PCA: 2D Visualization of Districts")
     
-    pca_image = Image.open('PCA_2d.png')
+    pca_image = Image.open('PCA_2D_visualization.png')
     st.image(pca_image, caption='PCA 2D Plot', use_column_width=True)
     
     st.write("### Elbow and Silhouette Methods for K-Means Clustering")
@@ -569,7 +569,10 @@ if page == pages[2]:    # Model Analysis
     Z = linkage(scaled_data, method='ward')
     
     dendrogram_image = Image.open('dendrogram.png')
-    st.image(dendrogram_image, caption='Dendrogram', use_column_width=True)
+    st.image(dendrogram_image, caption='Dendrogram 1', use_column_width=True)
+
+    dendrogram_image = Image.open('Dendrogram_1.png')
+    st.image(dendrogram_image, caption='Dendrogram 2', use_column_width=True)
 
     max_d = 5
     clusters = fcluster(Z, max_d, criterion='distance')
