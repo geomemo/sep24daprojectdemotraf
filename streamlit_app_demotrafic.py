@@ -655,4 +655,5 @@ if page == pages[3]:    # Conclusion and Perspectives
     st.write("4 - Time Management")
 
     if st.checkbox("It still applies ..."):
-        st.write('*"No obligation of results, but an obligation of effort."* DataScientest')
+        st.write('*"No obligation of results, but an obligation of effort."*   DataScientest')
+        st.write(' *"[...] there`s no an expected outcome of the project. We really want you to give your best effort to try as much things as you can [...] "*   Lucas Varela, 10.06.2024 ')
