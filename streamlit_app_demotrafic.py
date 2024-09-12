@@ -591,7 +591,7 @@ if page == pages[3]:    # Conclusion and Perspectives
     overview_image = Image.open('Overview_Predict_result.png')
     st.image(overview_image, caption='Overview Prediction and Results', use_column_width=True)
     st.write("The table reflects that the ML model's results largely confirmed the initial predictions about the spatial characteristics of urban and rural areas, with some nuanced findings, such as unexpected variations in rural vehicle ownership and the identification of outliers. The results led to strategic insights that were both expected and refined based on the detailed cluster analysis.")
-    st.write("Together, the heatmap and K-means clustering confirm that rural areas, with lower population and vehicle densities, have higher vehicle ownership per capita due to the increased necessity for personal transportation. Conversely, urban areas, where public transportation systems are more developed, generally exhibit lower vehicle ownership per capita. However, the analysis also highlights outliers and exceptions within urban regions, reflecting the complex interplay of factors such as income and transit availability. ")
+    st.write("**Together, the heatmap and K-means clustering confirm that rural areas, with lower population and vehicle densities, have higher vehicle ownership per capita** due to the increased necessity for personal transportation. Conversely, urban areas, where public transportation systems are more developed, generally exhibit lower vehicle ownership per capita. However, the analysis also highlights outliers and exceptions within urban regions, reflecting the complex interplay of factors such as income and transit availability. ")
     st.write("""
     #### Strengths:
     DBSCAN Success: Effectively identified meaningful clusters, handling non-spherical shapes and outliers.
@@ -653,3 +653,6 @@ if page == pages[3]:    # Conclusion and Perspectives
     st.write("2 - Teamwork")
     st.write("3 - Communication")
     st.write("4 - Time Management")
+
+    if st.checkbox("It still applies ..."):
+        st.write('*"No obligation of results, but an obligation of effort."* DataScientest')
