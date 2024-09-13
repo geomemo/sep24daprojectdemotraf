@@ -20,7 +20,8 @@ df = pd.read_csv("PopTra_cluster_corx7.csv", delimiter=',')
 sidebar_image = Image.open("sidebar_image1.png")  
 st.sidebar.image(sidebar_image, use_column_width=True)
 st.sidebar.markdown("**Data Analyst DA_June24 Bootcamp**")
-st.sidebar.markdown("M. Girtten - Geography M.Sc.<br>Lars Zintel - Economics M.Sc.", unsafe_allow_html=True)  
+st.sidebar.markdown("M. Girtten - Geography M.Sc.<br>Lars Zintel - Economics M.Sc.", unsafe_allow_html=True) 
+st.sidebar.markdown("Friday 13th, September 2024") 
 st.title("Investigating Relationships Between Demographic Data and Traffic Data in Germany")
 st.write("A Data-Driven Approach to Urban and Rural Traffic Analysis")
 
@@ -529,6 +530,13 @@ if page == pages[2]:    # Model Analysis
     st.write("#### Insights for Strategic Decisions: ")
     st.write("Urban Planning: For Cluster 1, focus on managing high population and vehicle densities, potentially by improving public transportation to reduce the need for personal vehicles. Rural Development: In Cluster 0, consider infrastructure improvements to support the higher per capita vehicle ownership, such as better road maintenance and access to services. Public Transportation: The difference in vehicle ownership per capita between the clusters suggests a need to tailor public transportation solutions based on regional characteristics.")
 
+    spectral_image = Image.open('spectral.png')
+    st.image(spectral_image, caption='Spectral', use_column_width=True)
+
+    mean_image = Image.open('mean.png')
+    st.image(mean_image, caption='mean', use_column_width=True)
+
+
     st.title("DBSCAN Clustering Analysis")
     st.write("This section analyzes the clustering results using the DBSCAN method.")
 
@@ -565,6 +573,10 @@ if page == pages[2]:    # Model Analysis
     plt.grid(True)
     st.pyplot(plt)
     st.write("The DBSCAN clustering plot shows distinct groups of districts, likely separating urban areas (denser clusters) from rural ones (more dispersed points). Some outliers represent regions with unique demographic or traffic patterns, underscoring DBSCAN's ability to identify non-spherical clusters and noise, valuable for targeted regional planning and traffic management.")
+
+
+
+
 
     st.write("### Hierarchical Clustering and Dendrogram")
 
